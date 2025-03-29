@@ -8,13 +8,12 @@ document.addEventListener('DOMContentLoaded', () => {
   // Language letters convert
   if (document.querySelector('[lang=ka]')) {
     document.querySelectorAll('[lang=ka]').forEach(($element) => {
-      $element.addEventListener('keypress', (event) => {
-        return jWriter(
-            $element,
-            event,
-            jWriterAlphabetLibrary.ka.mkhedruli
-        );
-      });
+      if (typeof $element.dataset['jwriterInitialized']) === 'undefined') {
+        const jw = new JWriter($element, JWriter.alphabetLibrary.ka.mkhedruli);
+        $element.addEventListener('keypress', (event) => {
+          return jw.write(event);
+        });
+      }
     });
   }
 });
