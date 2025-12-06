@@ -1,2 +1,2 @@
 # JWriter
-Javascript alphabet writer
+Language script converter

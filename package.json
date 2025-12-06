@@ -1,0 +1,13 @@
+{
+  "name": "jwriter",
+  "version": "0.0.1",
+  "description": "Language script converter",
+  "keywords": ["unicode", "converter", "languages", "jwriter"],
+  "main": "dist/jwriter.min.js",
+  "author": "Gigoland.com",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Gigoland/JWriter.git"
+  }
+}
