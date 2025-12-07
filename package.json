@@ -1,7 +1,7 @@
 {
   "name": "jwriter",
-  "version": "0.0.1",
-  "description": "Language script converter",
+  "version": "0.0.2",
+  "description": "Modern lightweight JavaScript library for real-time language script conversion",
   "keywords": ["unicode", "converter", "languages", "jwriter"],
   "main": "dist/jwriter.min.js",
   "author": "Gigoland.com",

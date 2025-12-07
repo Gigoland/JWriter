@@ -7,11 +7,36 @@
     <script src="../dist/jwriter.min.js"></script>
     <script>
       document.addEventListener('DOMContentLoaded', () => {
-        const myFirstJWiter = new JWriter(
-          document.getElementById('jw-text'),
+        // KA / Mkhedruli
+        const jWriterKaMkhedruli = new JWriter(
+          document.getElementById('jw-text-ka-mkhedruli'),
           jWriterCollection,
           'ka',
           'mkhedruli'
+        );
+
+        // KA / Asomtavruli
+        const jWriterKaAsomtavruli = new JWriter(
+          document.getElementById('jw-text-ka-asomtavruli'),
+          jWriterCollection,
+          'ka',
+          'asomtavruli'
+        );
+
+        // KA / Mtavruli
+        const jWriterKaMtavruli = new JWriter(
+          document.getElementById('jw-text-ka-mtavruli'),
+          jWriterCollection,
+          'ka',
+          'mtavruli'
+        );
+
+        // KA / Nuskhuri
+        const jWriterKaNuskhuri = new JWriter(
+          document.getElementById('jw-text-ka-nuskhuri'),
+          jWriterCollection,
+          'ka',
+          'nuskhuri'
         );
 
         // Static init to enable queued instances
@@ -20,7 +45,16 @@
     </script>
   </head>
   <body>
-    <h1>JWriter Demo (Mkhedruli)</h1>
-    <textarea id="jw-text" placeholder="Type latin letters..."></textarea>
+    <h1>JWriter Demo (Ka / Mkhedruli)</h1>
+    <textarea id="jw-text-ka-mkhedruli" placeholder="Type latin letters..."></textarea>
+    <hr>
+    <h1>JWriter Demo (Ka / Asomtavruli)</h1>
+    <textarea id="jw-text-ka-asomtavruli" placeholder="Type latin letters..."></textarea>
+    <hr>
+    <h1>JWriter Demo (Ka / Mtavruli)</h1>
+    <textarea id="jw-text-ka-mtavruli" placeholder="Type latin letters..."></textarea>
+    <hr>
+    <h1>JWriter Demo (Ka / Nuskhuri)</h1>
+    <textarea id="jw-text-ka-nuskhuri" placeholder="Type latin letters..."></textarea>
   </body>
 </html>
