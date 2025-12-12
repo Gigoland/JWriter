@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>JWriter with Language Switcher</title>
+    <!-- Bootstrap 5 -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+    <script src="../dist/data/collection.min.js"></script>
+    <script src="../dist/jwriter.min.js"></script>
+    <!-- Initialization Script -->
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        // Create JWriter instances
+        const jwSingle = new JWriter(document.getElementById('jw-input-single'), jWriterCollection, 'ka', 'mkhedruli');
+        const jwGlobal1 = new JWriter(document.getElementById('jw-input-global-1'), jWriterCollection, 'ka', 'mkhedruli');
+        const jwGlobal2 = new JWriter(document.getElementById('jw-input-global-2'), jWriterCollection, 'ka', 'mkhedruli');
+        const jwGlobal3 = new JWriter(document.getElementById('jw-input-global-3'), jWriterCollection, 'ka', 'mkhedruli');
+
+        JWriter.initAll();
+
+        // Single input switcher
+        document.querySelectorAll('.jw-single-switch').forEach(item => {
+          item.addEventListener('click', (e) => {
+            e.preventDefault();
+
+            // Update active state
+            e.target.parentElement.parentElement.querySelectorAll('.jw-single-switch').forEach(i => i.classList.remove('active'));
+            item.classList.add('active');
+git
+            // Update button text and switch language
+            document.getElementById('jw-single-current').textContent = item.textContent;
+            jwSingle.switch(item.dataset.lang, item.dataset.alphabet);
+          });
+        });
+
+        // Global switcher
+        document.querySelectorAll('.jw-global-switch').forEach(item => {
+          item.addEventListener('click', (e) => {
+            e.preventDefault();
+
+            // Update active state
+            document.querySelectorAll('.jw-global-switch').forEach(i => i.classList.remove('active'));
+            item.classList.add('active');
+
+            // Update button text and switch all
+            document.getElementById('jw-global-current').textContent = item.textContent;
+            JWriter.switchAll(item.dataset.lang, item.dataset.alphabet);
+          });
+        });
+      });
+    </script>
+  </head>
+  <body>
+    <div class="container mt-5">
+      <div class="demo-section">
+        <h2 class="mb-4">JWriter - Language Switcher Demo</h2>
+
+        <!-- Single Input with Switcher -->
+        <div class="mb-4">
+          <label class="form-label">Single Input with Language Switcher:</label>
+          <div class="input-group mb-3">
+            <input type="text" class="form-control" id="jw-input-single" aria-label="Text input with dropdown button">
+            <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <span id="jw-single-current">Mkhedruli</span>
+            </button>
+            <ul class="dropdown-menu">
+              <!-- Georgian -->
+              <li><h6 class="dropdown-header">Georgian (ქართული)</h6></li>
+              <li><a class="dropdown-item jw-single-switch active" href="#" data-lang="ka" data-alphabet="mkhedruli">Mkhedruli (მხედრული)</a></li>
+              <li><a class="dropdown-item jw-single-switch" href="#" data-lang="ka" data-alphabet="asomtavruli">Asomtavruli (ასომთავრული)</a></li>
+              <li><a class="dropdown-item jw-single-switch" href="#" data-lang="ka" data-alphabet="mtavruli">Mtavruli (მთავრული)</a></li>
+              <li><a class="dropdown-item jw-single-switch" href="#" data-lang="ka" data-alphabet="nuskhuri">Nuskhuri (ნუსხური)</a></li>
+              <li><hr class="dropdown-divider"></li>
+
+              <!-- Armenian -->
+              <li><h6 class="dropdown-header">Armenian (Հայերեն)</h6></li>
+              <li><a class="dropdown-item jw-single-switch" href="#" data-lang="hy" data-alphabet="lowercase">Armenian (աբգդ)</a></li>
+              <li><hr class="dropdown-divider"></li>
+
+              <!-- Cherokee -->
+              <li><h6 class="dropdown-header">Cherokee (ᏣᎳᎩ)</h6></li>
+              <li><a class="dropdown-item jw-single-switch" href="#" data-lang="chr" data-alphabet="syllabary">Cherokee (ᎠᎡᎢ)</a></li>
+              <li><hr class="dropdown-divider"></li>
+
+              <!-- Coptic -->
+              <li><h6 class="dropdown-header">Coptic (Ⲙⲉⲧⲣⲉⲙ̀ⲛⲭⲏⲙⲓ)</h6></li>
+              <li><a class="dropdown-item jw-single-switch" href="#" data-lang="cop" data-alphabet="lowercase">Coptic (ⲁⲃⲅ)</a></li>
+              <li><hr class="dropdown-divider"></li>
+
+              <!-- Greek -->
+              <li><h6 class="dropdown-header">Greek (Ελληνικά)</h6></li>
+              <li><a class="dropdown-item jw-single-switch" href="#" data-lang="el" data-alphabet="lowercase">Greek (αβγδ)</a></li>
+              <li><hr class="dropdown-divider"></li>
+
+              <!-- Hindi -->
+              <li><h6 class="dropdown-header">Hindi (हिन्दी)</h6></li>
+              <li><a class="dropdown-item jw-single-switch" href="#" data-lang="hi" data-alphabet="consonants">Hindi Devanagari (कखग)</a></li>
+              <li><hr class="dropdown-divider"></li>
+
+              <!-- Korean -->
+              <li><h6 class="dropdown-header">Korean (한국어)</h6></li>
+              <li><a class="dropdown-item jw-single-switch" href="#" data-lang="ko" data-alphabet="consonants">Hangul Consonants (ㄱㄴㄷ)</a></li>
+              <li><hr class="dropdown-divider"></li>
+
+              <!-- Ogham -->
+              <li><h6 class="dropdown-header">Ogham (᚛ᚑᚌᚐᚋ᚜)</h6></li>
+              <li><a class="dropdown-item jw-single-switch" href="#" data-lang="ogham" data-alphabet="standard">Ogham (ᚁᚂᚃ)</a></li>
+              <li><hr class="dropdown-divider"></li>
+
+              <!-- Runic -->
+              <li><h6 class="dropdown-header">Runic (ᚠᚢᚦᚨᚱᚲ)</h6></li>
+              <li><a class="dropdown-item jw-single-switch" href="#" data-lang="runes" data-alphabet="elder_futhark">Elder Futhark (ᚠᚢᚦ)</a></li>
+              <li><hr class="dropdown-divider"></li>
+
+              <!-- Russian -->
+              <li><h6 class="dropdown-header">Russian (Русский)</h6></li>
+              <li><a class="dropdown-item jw-single-switch" href="#" data-lang="ru" data-alphabet="lowercase">Russian (абвг)</a></li>
+              <li><hr class="dropdown-divider"></li>
+
+              <!-- Thai -->
+              <li><h6 class="dropdown-header">Thai (ไทย)</h6></li>
+              <li><a class="dropdown-item jw-single-switch" href="#" data-lang="th" data-alphabet="consonants">Thai (กขค)</a></li>
+              <li><hr class="dropdown-divider"></li>
+
+              <!-- Latin -->
+              <li><h6 class="dropdown-header">Latin</h6></li>
+              <li><a class="dropdown-item jw-single-switch" href="#" data-lang="en" data-alphabet="latin">English (Latin)</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Multiple Inputs (Global Switch) -->
+        <div class="mb-4">
+          <label class="form-label">Multiple Inputs (Global Switch):</label>
+          <div class="input-group mb-3">
+            <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <span id="jw-global-current">Mkhedruli</span>
+            </button>
+            <ul class="dropdown-menu">
+              <!-- Georgian -->
+              <li><h6 class="dropdown-header">Georgian (ქართული)</h6></li>
+              <li><a class="dropdown-item jw-global-switch active" href="#" data-lang="ka" data-alphabet="mkhedruli">Mkhedruli (მხედრული)</a></li>
+              <li><a class="dropdown-item jw-global-switch" href="#" data-lang="ka" data-alphabet="asomtavruli">Asomtavruli (ასომთავრული)</a></li>
+              <li><a class="dropdown-item jw-global-switch" href="#" data-lang="ka" data-alphabet="mtavruli">Mtavruli (მთავრული)</a></li>
+              <li><a class="dropdown-item jw-global-switch" href="#" data-lang="ka" data-alphabet="nuskhuri">Nuskhuri (ნუსხური)</a></li>
+              <li><hr class="dropdown-divider"></li>
+
+              <!-- Latin -->
+              <li><h6 class="dropdown-header">Latin</h6></li>
+              <li><a class="dropdown-item jw-global-switch" href="#" data-lang="en" data-alphabet="latin">English (Latin)</a></li>
+            </ul>
+          </div>
+
+          <textarea class="form-control mb-2" id="jw-input-global-1" placeholder="Input 1..."></textarea>
+          <textarea class="form-control mb-2" id="jw-input-global-2" placeholder="Input 2..."></textarea>
+          <textarea class="form-control" id="jw-input-global-3" placeholder="Input 3..."></textarea>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

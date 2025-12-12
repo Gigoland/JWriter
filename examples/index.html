@@ -3,12 +3,12 @@
   <head>
     <meta charset="utf-8">
     <title>JWriter Demo</title>
-    <script src="../src/data/collection.js"></script>
+    <script src="../dist/data/collection.min.js"></script>
     <script src="../dist/jwriter.min.js"></script>
     <script>
       document.addEventListener('DOMContentLoaded', () => {
         // KA / Mkhedruli
-        const jWriterKaMkhedruli = new JWriter(
+        const jwKaMkhedruli = new JWriter(
           document.getElementById('jw-text-ka-mkhedruli'),
           jWriterCollection,
           'ka',
@@ -16,7 +16,7 @@
         );
 
         // KA / Asomtavruli
-        const jWriterKaAsomtavruli = new JWriter(
+        const jwKaAsomtavruli = new JWriter(
           document.getElementById('jw-text-ka-asomtavruli'),
           jWriterCollection,
           'ka',
@@ -24,7 +24,7 @@
         );
 
         // KA / Mtavruli
-        const jWriterKaMtavruli = new JWriter(
+        const jwKaMtavruli = new JWriter(
           document.getElementById('jw-text-ka-mtavruli'),
           jWriterCollection,
           'ka',
@@ -32,7 +32,7 @@
         );
 
         // KA / Nuskhuri
-        const jWriterKaNuskhuri = new JWriter(
+        const jwKaNuskhuri = new JWriter(
           document.getElementById('jw-text-ka-nuskhuri'),
           jWriterCollection,
           'ka',

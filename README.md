@@ -103,23 +103,12 @@ JWriter.initAll();
 JWriter.switchAll('ka', 'mtavruli');
 ```
 
-## 🌍 Supported Scripts
-
-### Georgian (ka)
-
-| Alphabet | Description | Example |
-|----------|-------------|---------|
-| `mkhedruli` | Modern Georgian lowercase | ა ბ გ დ ე |
-| `asomtavruli` | Ancient Georgian majuscule | Ⴀ Ⴁ Ⴂ Ⴃ Ⴄ |
-| `mtavruli` | Modern Georgian uppercase | Ა Ბ Გ Დ Ე |
-| `nuskhuri` | Medieval Georgian minuscule | ⴀ ⴁ ⴂ ⴃ ⴄ |
-
 ## 🔧 Custom Collection
 
 Create your own language collection:
 
 ```javascript
-const myCollection = {
+const jWriterCollection = {
   'language_code': {
     'alphabet_name': {
       'alphabet': 'abcdefghijklmnopqrstuvwxyz',  // Latin mapping
@@ -134,15 +123,15 @@ const myCollection = {
 ### Multiple Inputs with Different Alphabets
 
 ```javascript
-const input1 = new JWriter(
-  document.getElementById('input1'),
+const jwInput1 = new JWriter(
+  document.getElementById('jw-input-1'),
   jWriterCollection,
   'ka',
   'mkhedruli'
 );
 
-const input2 = new JWriter(
-  document.getElementById('input2'),
+const jwInput2 = new JWriter(
+  document.getElementById('jw-input-2'),
   jWriterCollection,
   'ka',
   'asomtavruli'
@@ -155,7 +144,7 @@ JWriter.initAll();
 
 ```javascript
 const writer = new JWriter(
-  document.getElementById('myInput'),
+  document.getElementById('jw-input'),
   jWriterCollection,
   'ka',
   'mkhedruli'
@@ -164,12 +153,12 @@ const writer = new JWriter(
 JWriter.initAll();
 
 // Switch to uppercase
-document.getElementById('uppercaseBtn').addEventListener('click', () => {
+document.getElementById('jw-uppercase-btn').addEventListener('click', () => {
   writer.switch('ka', 'mtavruli');
 });
 
 // Switch back to lowercase
-document.getElementById('lowercaseBtn').addEventListener('click', () => {
+document.getElementById('jw-lowercase-btn').addEventListener('click', () => {
   writer.switch('ka', 'mkhedruli');
 });
 ```
@@ -179,16 +168,16 @@ document.getElementById('lowercaseBtn').addEventListener('click', () => {
 ```javascript
 // Create multiple instances
 const writers = [
-  new JWriter(document.getElementById('input1'), jWriterCollection, 'ka', 'mkhedruli'),
-  new JWriter(document.getElementById('input2'), jWriterCollection, 'ka', 'mkhedruli'),
-  new JWriter(document.getElementById('input3'), jWriterCollection, 'ka', 'mkhedruli')
+  new JWriter(document.getElementById('jw-input-1'), jWriterCollection, 'ka', 'mkhedruli'),
+  new JWriter(document.getElementById('jw-input-2'), jWriterCollection, 'ka', 'asomtavruli'),
+  new JWriter(document.getElementById('jw-input-3'), jWriterCollection, 'ka', 'mtavruli')
 ];
 
 JWriter.initAll();
 
 // Switch all at once
-document.getElementById('globalSwitch').addEventListener('click', () => {
-  JWriter.switchAll('ka', 'asomtavruli');
+document.getElementById('jw-global-switch').addEventListener('click', () => {
+  JWriter.switchAll('ka', 'nuskhuri');
 });
 ```
 
@@ -203,12 +192,82 @@ Georgian: ა ბ გ დ ე ვ ზ თ ი კ ლ მ ნ ო პ ჟ რ �
 
 **Note:** Capital letters represent special Georgian characters (e.g., T = თ, J = ჟ)
 
-## 🛠️ Browser Support
+## 🌍 Supported Scripts
 
-- Chrome/Edge (latest)
-- Firefox (latest)
-- Safari (latest)
-- Opera (latest)
+### Georgian (ka)
+
+| Alphabet     | Description                  | Example     |
+|--------------|------------------------------|-------------|
+| `mkhedruli`  | Modern Georgian lowercase    | ა ბ გ დ ე   |
+| `asomtavruli`| Ancient Georgian majuscule   | Ⴀ Ⴁ Ⴂ Ⴃ Ⴄ |
+| `mtavruli`   | Modern Georgian uppercase    | Ა Ბ Გ Დ Ე   |
+| `nuskhuri`   | Medieval Georgian minuscule  | ⴀ ⴁ ⴂ ⴃ ⴄ   |
+
+### Armenian (hy)
+
+| Alphabet     | Description                  | Example     |
+|--------------|------------------------------|-------------|
+| `lowercase`  | Armenian lowercase letters   | ա բ գ դ ե   |
+
+### Cherokee (chr)
+
+| Alphabet     | Description                  | Example     |
+|--------------|------------------------------|-------------|
+| `syllabary`  | Cherokee syllabary           | Ꭰ Ꭱ Ꭲ Ꭳ Ꭴ   |
+
+### Coptic (cop)
+
+| Alphabet     | Description                  | Example     |
+|--------------|------------------------------|-------------|
+| `lowercase`  | Coptic lowercase letters     | ⲁ ⲃ ⲅ ⲇ ⲉ   |
+
+### Greek (el)
+
+| Alphabet     | Description                  | Example     |
+|--------------|------------------------------|-------------|
+| `lowercase`  | Greek lowercase letters      | α β γ δ ε    |
+
+### Hindi (hi)
+
+| Alphabet     | Description                  | Example     |
+|--------------|------------------------------|-------------|
+| `consonants` | Hindi Devanagari consonants  | क ख ग घ ङ   |
+
+### Korean (ko)
+
+| Alphabet     | Description                  | Example     |
+|--------------|------------------------------|-------------|
+| `consonants` | Korean Hangul consonants     | ㄱ ㄲ ㄴ ㄷ ㄸ |
+
+### Ogham (ogham)
+
+| Alphabet     | Description                  | Example     |
+|--------------|------------------------------|-------------|
+| `standard`   | Standard Ogham script        | ᚁ ᚂ ᚃ ᚄ ᚅ   |
+
+### Runic (runes)
+
+| Alphabet         | Description                  | Example     |
+|------------------|------------------------------|-------------|
+| `elder_futhark`  | Runic Elder Futhark          | ᚠ ᚢ ᚦ ᚨ ᚱ   |
+
+### Russian (ru)
+
+| Alphabet     | Description                  | Example     |
+|--------------|------------------------------|-------------|
+| `lowercase`  | Russian Cyrillic lowercase   | а б в г д    |
+
+### Thai (th)
+
+| Alphabet     | Description                  | Example     |
+|--------------|------------------------------|-------------|
+| `consonants` | Thai consonants              | ก ข ค ฆ ง    |
+
+### English/Latin (en)
+
+| Alphabet     | Description                  | Example     |
+|--------------|------------------------------|-------------|
+| `latin`      | Standard Latin (no conversion) | a b c d e  |
 
 ## 📝 License
 
