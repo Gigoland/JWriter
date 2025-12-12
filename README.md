@@ -24,6 +24,7 @@ JWriter is a powerful yet lightweight utility that enables real-time translitera
 Download `jwriter.min.js` and include it in your HTML:
 
 ```html
+<script src="path/to/data/collection.min.js"></script>
 <script src="path/to/jwriter.min.js"></script>
 ```
 
@@ -41,7 +42,7 @@ npm install jwriter
 <!DOCTYPE html>
 <html>
 <head>
-  <script src="collection.js"></script>
+  <script src="collection.min.js"></script>
   <script src="jwriter.min.js"></script>
   <script>
     document.addEventListener('DOMContentLoaded', () => {
