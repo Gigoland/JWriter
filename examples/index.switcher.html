@@ -6,32 +6,61 @@
     <title>JWriter with Language Switcher</title>
     <!-- Bootstrap 5 -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+      .dropdown-menu {
+        max-height: 400px;
+        overflow-y: auto;
+      }
+    </style>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
     <script src="../dist/data/collection.min.js"></script>
     <script src="../dist/jwriter.min.js"></script>
     <!-- Initialization Script -->
     <script>
+      const writerInstances = new Map();
+
       document.addEventListener('DOMContentLoaded', () => {
         // Create JWriter instances
-        const jwSingle = new JWriter(document.getElementById('jw-input-single'), jWriterCollection, 'ka', 'mkhedruli');
-        const jwGlobal1 = new JWriter(document.getElementById('jw-input-global-1'), jWriterCollection, 'ka', 'mkhedruli');
-        const jwGlobal2 = new JWriter(document.getElementById('jw-input-global-2'), jWriterCollection, 'ka', 'mkhedruli');
-        const jwGlobal3 = new JWriter(document.getElementById('jw-input-global-3'), jWriterCollection, 'ka', 'mkhedruli');
+        document.querySelectorAll('.jwriter').forEach(el => {
+          const lang = el.dataset.lang;
+          const alphabet = el.dataset.alphabet;
+          const writer = new JWriter(el, jWriterCollection, lang, alphabet);
+          writerInstances.set(el.id, { writer, lang, alphabet });
+        });
 
+        // Init all instances
         JWriter.initAll();
+
+        // Checkbox toggle
+        document.querySelectorAll('.jw-single-checkbox').forEach(checkbox => {
+          checkbox.addEventListener('change', (e) => {
+            const instance = writerInstances.get(checkbox.dataset.target);
+            if (instance) {
+              instance.writer.switch(
+                checkbox.checked ? instance.lang : 'en',
+                checkbox.checked ? instance.alphabet : 'latin'
+              );
+            }
+          });
+        });
 
         // Single input switcher
         document.querySelectorAll('.jw-single-switch').forEach(item => {
           item.addEventListener('click', (e) => {
             e.preventDefault();
 
-            // Update active state
-            e.target.parentElement.parentElement.querySelectorAll('.jw-single-switch').forEach(i => i.classList.remove('active'));
+            const menu = item.closest('.dropdown-menu');
+            menu.querySelectorAll('.jw-single-switch').forEach(i => i.classList.remove('active'));
             item.classList.add('active');
-git
-            // Update button text and switch language
+
             document.getElementById('jw-single-current').textContent = item.textContent;
-            jwSingle.switch(item.dataset.lang, item.dataset.alphabet);
+
+            const instance = writerInstances.get(menu.dataset.target);
+            if (instance) {
+              instance.lang = item.dataset.lang;
+              instance.alphabet = item.dataset.alphabet;
+              instance.writer.switch(instance.lang, instance.alphabet);
+            }
           });
         });
 
@@ -40,11 +69,9 @@ git
           item.addEventListener('click', (e) => {
             e.preventDefault();
 
-            // Update active state
             document.querySelectorAll('.jw-global-switch').forEach(i => i.classList.remove('active'));
             item.classList.add('active');
 
-            // Update button text and switch all
             document.getElementById('jw-global-current').textContent = item.textContent;
             JWriter.switchAll(item.dataset.lang, item.dataset.alphabet);
           });
@@ -55,17 +82,28 @@ git
   <body>
     <div class="container mt-5">
       <div class="demo-section">
-        <h2 class="mb-4">JWriter - Language Switcher Demo</h2>
+        <h2 class="mb-4">JWriter - Language Switchers Demo</h2>
+
+        <!-- Single Input with Checkbox -->
+        <div class="mb-4">
+          <label class="form-label">1. Single Input with Checkbox Language Switcher:</label>
+          <div class="input-group">
+            <input type="text" id="jw-checkbox-input" class="jwriter form-control" placeholder="Type here..." data-lang="ka" data-alphabet="mkhedruli">
+            <div class="input-group-text">
+              <input type="checkbox" class="jw-single-checkbox form-check-input mt-0" data-target="jw-checkbox-input" checked>
+            </div>
+          </div>
+        </div>
 
         <!-- Single Input with Switcher -->
         <div class="mb-4">
-          <label class="form-label">Single Input with Language Switcher:</label>
+          <label class="form-label">2. Single Input with Language Switchers:</label>
           <div class="input-group mb-3">
-            <input type="text" class="form-control" id="jw-input-single" aria-label="Text input with dropdown button">
+            <input type="text" id="jw-input-single" class="jwriter form-control" placeholder="Type here..." data-lang="ka" data-alphabet="mkhedruli">
             <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
               <span id="jw-single-current">Mkhedruli</span>
             </button>
-            <ul class="dropdown-menu">
+            <ul class="dropdown-menu" data-target="jw-input-single">
               <!-- Georgian -->
               <li><h6 class="dropdown-header">Georgian (ქართული)</h6></li>
               <li><a class="dropdown-item jw-single-switch active" href="#" data-lang="ka" data-alphabet="mkhedruli">Mkhedruli (მხედრული)</a></li>
@@ -133,7 +171,7 @@ git
 
         <!-- Multiple Inputs (Global Switch) -->
         <div class="mb-4">
-          <label class="form-label">Multiple Inputs (Global Switch):</label>
+          <label class="form-label">3. Multiple Inputs (Global Switch):</label>
           <div class="input-group mb-3">
             <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
               <span id="jw-global-current">Mkhedruli</span>
@@ -153,9 +191,9 @@ git
             </ul>
           </div>
 
-          <textarea class="form-control mb-2" id="jw-input-global-1" placeholder="Input 1..."></textarea>
-          <textarea class="form-control mb-2" id="jw-input-global-2" placeholder="Input 2..."></textarea>
-          <textarea class="form-control" id="jw-input-global-3" placeholder="Input 3..."></textarea>
+          <textarea id="jw-input-global-1" class="jwriter form-control mb-2" placeholder="Type here..." data-lang="ka" data-alphabet="mkhedruli"></textarea>
+          <textarea id="jw-input-global-2" class="jwriter form-control mb-2" placeholder="Type here..." data-lang="ka" data-alphabet="mkhedruli"></textarea>
+          <textarea id="jw-input-global-3" class="jwriter form-control" placeholder="Type here..." data-lang="ka" data-alphabet="mkhedruli"></textarea>
         </div>
       </div>
     </div>
