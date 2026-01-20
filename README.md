@@ -200,8 +200,8 @@ Georgian: ა ბ გ დ ე ვ ზ თ ი კ ლ მ ნ ო პ ჟ რ �
 | Alphabet     | Description                  | Example     |
 |--------------|------------------------------|-------------|
 | `mkhedruli`  | Modern Georgian lowercase    | ა ბ გ დ ე   |
-| `asomtavruli`| Ancient Georgian majuscule   | Ⴀ Ⴁ Ⴂ Ⴃ Ⴄ |
 | `mtavruli`   | Modern Georgian uppercase    | Ა Ბ Გ Დ Ე   |
+| `asomtavruli`| Ancient Georgian majuscule   | Ⴀ Ⴁ Ⴂ Ⴃ Ⴄ |
 | `nuskhuri`   | Medieval Georgian minuscule  | ⴀ ⴁ ⴂ ⴃ ⴄ   |
 
 ### Armenian (hy)

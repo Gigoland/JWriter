@@ -1,6 +1,6 @@
 /**
  * JWriter - Language script converter
- * @version 0.0.2
+ * @version 0.0.3
  * @author Gigoland.com
  * @license MIT License
  * @see {@link https://github.com/Gigoland/JWriter}
@@ -74,8 +74,16 @@ class JWriter {
 
     this.$element = $element;
     this.collection = collection;
-    this.language = language;
-    this.alphabet = alphabet;
+
+    // Prioritize constructor params, then data attributes
+    this.language = language || this.$element.dataset.language || null;
+    this.alphabet = alphabet || this.$element.dataset.alphabet || null;
+
+    // If alphabet not specified but language is, default to first alphabet in collection
+    if (this.language && !this.alphabet && this.collection[this.language]) {
+      this.alphabet = Object.keys(this.collection[this.language])[0];
+    }
+
     this.handler = null;
 
     JWriter.waiting.add(this);
@@ -163,6 +171,11 @@ class JWriter {
     }
     if (alphabet) {
       this.alphabet = alphabet;
+    }
+
+    // If alphabet not specified but language is, default to first alphabet in collection
+    if (this.language && !this.alphabet && this.collection[this.language]) {
+      this.alphabet = Object.keys(this.collection[this.language])[0];
     }
 
     // Reactivate with new parameters
